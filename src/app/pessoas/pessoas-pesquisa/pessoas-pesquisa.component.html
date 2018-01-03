@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Pessoas</h1>
+    </div>
+
+    <form autocomplete="off" (ngSubmit)="consultar()">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome:</label>
+      <input pInputText type="text" name="inome"[(ngModel)]="filter.nome">
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton type="submit" label="Pesquisar"></button>
+    </div>
+  </form>
+  </div>
+
+  <div class="ui-g">
+
+    <div class="ui-g-12">
+      <p-dataTable [value]="pessoas" [paginator]="true" [rows]="filter.itensPorPagina"
+        [responsive]="true" emptyMessage="Nenhum registro encontrado" [lazy]="true"
+        [totalRecords]="totalRegistros" (onLazyLoad)="aoMudarPagina($event)" #tabela>
+        <p-column field="nome" header="Nome"></p-column>
+        <p-column field="endereco.cidade" header="Cidade"></p-column>
+        <p-column field="endereco.estado" header="Estado" styleClass="col-status"></p-column>
+
+        <p-column field="ativo" header="Status" styleClass="col-status">
+          <ng-template let-pessoa="rowData" pTemplate="body">
+            <a href="javascript:;" pTooltip="{{pessoa.ativo ? 'desativar' : 'ativar'}}"
+              (click)="changeStatus(pessoa)" tooltipPosition="top">{{pessoa.ativo ? 'Ativo' : 'Inativo'}}</a>
+          </ng-template>
+        </p-column>
+        <p-column styleClass="col-acoes">
+          <ng-template let-pessoa="rowData" pTemplate="body">
+            <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="top"
+            [routerLink]="['/pessoas', pessoa.codigo]"></a>
+            <button pButton icon="fa-trash" pTooltip="Excluir" tooltipPosition="top"
+              (click)="confirmarExclusao(pessoa)"></button>
+          </ng-template>
+        </p-column>
+      </p-dataTable>
+    </div>
+
+
+    <div class="ui-g-12">
+      <a pButton label="Nova Pessoa" routerLink="/pessoas/novo"></a>
+    </div>
+  </div>
+
+</div>

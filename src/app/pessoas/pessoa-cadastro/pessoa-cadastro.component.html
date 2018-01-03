@@ -1,0 +1,102 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="salvar(f)" autocomplete="off">
+    <div class="ui-g">
+
+      <div class="ui-g-12">
+        <h1>{{ getTitle }}</h1>
+      </div>
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+      <div class="ui-g-12 ui-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome" [(ngModel)]="pessoa.nome" #fNome="ngModel"
+           required minlength="5" maxlength="50">
+        <app-error-message [control]="fNome" error="required"
+           text="Informe o Nome"></app-error-message>
+        <app-error-message [control]="fNome" error="minlength"
+           text="Minimo de {{ fNome.errors?.minlength?.requiredLength }} caracteres"></app-error-message>
+
+      </div>
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+      <div class="ui-g-12 ui-md-9 ui-fluid">
+          <label>Logradouro</label>
+          <input pInputText type="text" name="logradouro" [(ngModel)]="pessoa.endereco.logradouro"
+           #fLogradouro="ngModel" required minlength="3" maxlength="30">
+          <app-error-message [control]="fLogradouro" error="required"
+            text="Informe o Logradouro"></app-error-message>
+         <app-error-message [control]="fLogradouro" error="minlength"
+            text="Minimo de {{ fLogradouro.errors?.minlength?.requiredLength }} caracteres"></app-error-message>
+
+      </div>
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+        <div class="ui-g-12 ui-md-3 ui-fluid">
+            <label>Numero</label>
+            <input pInputText type="text" name="numero" [(ngModel)]="pessoa.endereco.numero"
+             #fNumero="ngModel" required maxlength="30">
+            <app-error-message [control]="fNumero" error="required"
+              text="Informe o Numero"></app-error-message>
+        </div>
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+        <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Complemento</label>
+            <input pInputText type="text" maxlength="30" name="complemento" [(ngModel)]="pessoa.endereco.complemento">
+        </div>
+
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+        <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>Bairro</label>
+            <input pInputText type="text" name="bairro" [(ngModel)]="pessoa.endereco.bairro"
+             #fBairro="ngModel" required maxlength="30">
+            <app-error-message [control]="fBairro" error="required"
+              text="Informe o Bairro"></app-error-message>
+         </div>
+
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+         <div class="ui-g-12 ui-md-4 ui-fluid">
+            <label>CEP</label>
+            <p-inputMask mask="99999-999" name="cep" [(ngModel)]="pessoa.endereco.cep"
+              #fCep="ngModel" #fCep="ngModel" required [minlength]="8">
+            </p-inputMask>
+            <app-error-message [control]="fCep" error="required"
+              text="Informe o CEP"></app-error-message>
+         </div>
+
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+         <div class="ui-g-12 ui-md-9 ui-fluid">
+            <label>Cidade</label>
+            <input pInputText type="text" name="cidade" [(ngModel)]="pessoa.endereco.cidade"
+              #fCidade="ngModel" required maxlength="30">
+
+            <app-error-message [control]="fCidade" error="required"
+              text="Informe a Cidade"></app-error-message>
+        </div>
+
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+        <div class="ui-g-12 ui-md-3 ui-fluid">
+            <label>Estado</label>
+            <input pInputText type="text" name="estado" [(ngModel)]="pessoa.endereco.estado"
+              #fEstado="ngModel" required minlength="2" maxlength="2">
+
+            <app-error-message [control]="fEstado" error="required"
+            text="Informe o Estado"></app-error-message>
+            <app-error-message [control]="fEstado" error="minlength"
+            text="Estado precisa ter 2 caracteres"></app-error-message>
+         </div>
+
+<!--p>-----------------------------------------------------------------------------------------------<p-->
+
+         <div class="ui-g-12">
+            <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+            <button pButton type="button" label="Novo" class="ui-button-info"
+              (click)="novo(f)"></button>
+            <a routerLink="/pessoas">Voltar para pagina de pesquisa</a>
+          </div>
+
+
+    </div>
+  </form>
+</div>
